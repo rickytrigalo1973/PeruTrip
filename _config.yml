@@ -1,0 +1,6 @@
+title: The Sacred Inca Path
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - netlify.toml
+  - README.md

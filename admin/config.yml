@@ -1,0 +1,188 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "content"
+    label: "Page Content"
+    files:
+      - file: "_data/content.yml"
+        label: "The Sacred Inca Path — Page Content"
+        name: "content"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow (dates/location line)", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+              - {label: "Hosts line", name: "hosts_line", widget: "string"}
+              - {label: "Primary button text", name: "primary_button_text", widget: "string"}
+              - {label: "Primary button URL", name: "primary_button_url", widget: "string"}
+              - {label: "Secondary button text", name: "secondary_button_text", widget: "string"}
+              - {label: "Secondary button URL", name: "secondary_button_url", widget: "string"}
+
+          - label: "Invitation"
+            name: "invitation"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Paragraph 1", name: "paragraph_1", widget: "text"}
+              - {label: "Paragraph 2", name: "paragraph_2", widget: "text"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Image alt text", name: "image_alt", widget: "string"}
+
+          - label: "Who This Is For"
+            name: "forwho"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Lede", name: "lede", widget: "text"}
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Text", name: "text", widget: "text"}
+
+          - label: "What You'll Receive"
+            name: "receive"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Lede", name: "lede", widget: "text"}
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "image", widget: "image"}
+                  - {label: "Image alt text", name: "image_alt", widget: "string"}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Text", name: "text", widget: "text"}
+
+          - label: "The Ceremonies"
+            name: "ceremonies"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "Ceremony list items"
+                name: "items"
+                widget: "list"
+                field: {label: "Item", name: "item", widget: "string"}
+              - label: "Gallery photos"
+                name: "gallery"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "image", widget: "image"}
+                  - {label: "Alt text", name: "alt", widget: "string"}
+              - {label: "Gallery caption", name: "gallery_caption", widget: "string"}
+
+          - label: "Day by Day Itinerary"
+            name: "itinerary"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Lede", name: "lede", widget: "text"}
+              - label: "Days"
+                name: "days"
+                widget: "list"
+                fields:
+                  - {label: "Day tag (e.g. 'Day 1 · Thu Dec 10 - Arrival')", name: "tag", widget: "string"}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Description", name: "text", widget: "text"}
+
+          - label: "Where You'll Stay"
+            name: "hotels"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "Hotels"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "image", widget: "image"}
+                  - {label: "Image alt text", name: "alt", widget: "string"}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Text", name: "text", widget: "text"}
+
+          - label: "What's Included"
+            name: "included"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "\"Included\" heading", name: "included_title", widget: "string"}
+              - label: "Included items"
+                name: "included_items"
+                widget: "list"
+                field: {label: "Item", name: "item", widget: "string"}
+              - {label: "\"Not included\" heading", name: "not_included_title", widget: "string"}
+              - label: "Not included items"
+                name: "not_included_items"
+                widget: "list"
+                field: {label: "Item", name: "item", widget: "string"}
+
+          - label: "Your Guides"
+            name: "hosts"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "People"
+                name: "people"
+                widget: "list"
+                fields:
+                  - {label: "Photo", name: "image", widget: "image"}
+                  - {label: "Photo alt text", name: "alt", widget: "string"}
+                  - {label: "Name", name: "name", widget: "string"}
+                  - {label: "Role", name: "role", widget: "string"}
+                  - {label: "Bio", name: "bio", widget: "text"}
+
+          - label: "FAQ"
+            name: "faq"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "Questions"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Question", name: "question", widget: "string"}
+                  - {label: "Answer", name: "answer", widget: "text"}
+                  - {label: "Open by default", name: "open", widget: "boolean", required: false, default: false}
+
+          - label: "Pricing"
+            name: "pricing"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Lede", name: "lede", widget: "string"}
+              - {label: "Shared room price", name: "shared_room_price", widget: "string"}
+              - {label: "Private room price", name: "private_room_price", widget: "string"}
+              - {label: "Button text", name: "button_text", widget: "string"}
+              - {label: "Button URL", name: "button_url", widget: "string"}
+              - {label: "Deposit note (line 1)", name: "deposit_note", widget: "string"}
+              - {label: "Deposit note (line 2)", name: "deposit_note_2", widget: "string"}
+
+          - label: "Final Call to Action"
+            name: "final"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Text", name: "text", widget: "text"}
+              - {label: "Button text", name: "button_text", widget: "string"}
+              - {label: "Button URL", name: "button_url", widget: "string"}
+              - {label: "Contact line", name: "contact_line", widget: "string"}
