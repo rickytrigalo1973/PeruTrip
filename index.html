@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -237,17 +239,18 @@
 </style>
 </head>
 <body>
+{% assign c = site.data.content %}
 
   <section class="hero">
     <div class="photo-ph"></div>
     <div class="hero-inner wrap">
-      <div class="hero-eyebrow">Dec 10&ndash;21, 2026 &middot; Sacred Valley &amp; Cusco, Peru</div>
-      <h1>The Sacred Inca Path</h1>
-      <p class="sub">A twelve-day journey of a deeper connection to self and nature, Inca tradition and life transformation.</p>
-      <p class="meta">With Viviana Dumas, Avishai Pearlson &amp; Ricky Trigalo</p>
+      <div class="hero-eyebrow">{{ c.hero.eyebrow }}</div>
+      <h1>{{ c.hero.title }}</h1>
+      <p class="sub">{{ c.hero.subtitle }}</p>
+      <p class="meta">{{ c.hero.hosts_line }}</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="https://www.paypal.com/pool/9qJJpGJglF?sr=wccr">Reserve your spot</a>
-        <a class="btn btn-ghost" href="mailto:ricky@rickytrigalonutrition.com">Ask us a question</a>
+        <a class="btn btn-primary" href="{{ c.hero.primary_button_url }}">{{ c.hero.primary_button_text }}</a>
+        <a class="btn btn-ghost" href="{{ c.hero.secondary_button_url }}">{{ c.hero.secondary_button_text }}</a>
       </div>
     </div>
   </section>
@@ -255,67 +258,45 @@
   <section class="invitation">
     <div class="wrap invitation-grid">
       <div>
-        <div class="eyebrow">Small Intimate Circle</div>
-        <h2>Twelve days. A small circle. Deepening connection to Myself, Community and Nature.</h2>
-        <p>There is a valley in the Andes where the mountains are alive, where rivers carry the memory of ancient rites, and where the medicine of the Q'ero shamans still moves through fire, plant, and song.</p>
-        <p>This journey was created for people who are ready to go deeper than a vacation, to be held, in ceremony and in community, by a team who understands both the body and the spirit.</p>
+        <div class="eyebrow">{{ c.invitation.eyebrow }}</div>
+        <h2>{{ c.invitation.title }}</h2>
+        <p>{{ c.invitation.paragraph_1 }}</p>
+        <p>{{ c.invitation.paragraph_2 }}</p>
       </div>
-      <img src="images/q-ero-shamans-holding-ceremony.jpg" alt="Q'ero shamans holding ceremony" style="width:100%; height:340px; object-fit:cover; border-radius:4px;">
+      <img src="{{ c.invitation.image }}" alt="{{ c.invitation.image_alt }}" style="width:100%; height:340px; object-fit:cover; border-radius:4px;">
     </div>
   </section>
 
   <section class="forwho">
     <div class="wrap">
       <div class="ornament"><span></span><i></i><span></span></div>
-      <span class="eyebrow">Who this journey is for</span>
-      <h2>You look well on the outside. But something in you is asking for more.</h2>
-      <p class="lede">Many of the people drawn to this journey are high-functioning, successful, and yet deeply tired - carrying stress, disconnection, or unresolved experiences that everyday life doesn't leave room to face.</p>
+      <span class="eyebrow">{{ c.forwho.eyebrow }}</span>
+      <h2>{{ c.forwho.title }}</h2>
+      <p class="lede">{{ c.forwho.lede }}</p>
       <div class="fw-grid">
-        <div class="fw-item">
-          <h3>You feel most yourself in nature</h3>
-          <p>Mountains, rivers, and open sky restore you in a way daily life doesn't, and you're drawn to healing that happens outdoors, at altitude, in the presence of the Andes.</p>
+        {% for card in c.forwho.cards %}
+        <div class="fw-item"{% if forloop.last %} style="grid-column:1/-1;"{% endif %}>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
         </div>
-        <div class="fw-item">
-          <h3>You want expert, grounded facilitation</h3>
-          <p>Not just a retreat, but a team that understands the body, the nervous system, and how to integrate what journey brings up.</p>
-        </div>
-        <div class="fw-item">
-          <h3>You're carrying something unresolved</h3>
-          <p>Stress, grief, burnout, or past experiences that are keeping you from living your dream.</p>
-        </div>
-        <div class="fw-item">
-          <h3>You're ready to be part of a small healing circle</h3>
-          <p>You want intimacy and depth, not a crowd, and you're willing to show up fully for twelve days of life-transforming activities.</p>
-        </div>
-        <div class="fw-item" style="grid-column:1/-1;">
-          <h3>You feel the pull toward rituals and ceremonies</h3>
-          <p>You're curious about or already familiar with plant medicines, rituals, or shamanic practice, and you're ready to go deeper with proper support.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
 
   <section class="receive">
     <div class="wrap">
-      <span class="eyebrow" style="display:block; text-align:center; margin-bottom:10px;">What you'll receive</span>
-      <h2>A journey held from intention to integration</h2>
-      <p class="lede">This isn't just about a single ceremony; it's a complete journey designed to stay with you long after you return home. Hopefully forever.</p>
+      <span class="eyebrow" style="display:block; text-align:center; margin-bottom:10px;">{{ c.receive.eyebrow }}</span>
+      <h2>{{ c.receive.title }}</h2>
+      <p class="lede">{{ c.receive.lede }}</p>
       <div class="r-grid">
+        {% for card in c.receive.cards %}
         <div class="r-item">
-          <img src="images/despacho-ceremony-offering-being-prepared.jpg" alt="Despacho ceremony offering being prepared" style="width:100%; height:180px; object-fit:cover; border-radius:4px; margin-bottom:20px;">
-          <h3>Release what you've been carrying</h3>
-          <p>Through fire ritual, mini vision quest, Kambo, and Wachuma (San Pedro) medicine (optional), held by experienced local shamans, you'll have real space to let go of what's been stored in the body, soul and the nervous system.</p>
+          <img src="{{ card.image }}" alt="{{ card.image_alt }}" style="width:100%; height:180px; object-fit:cover;{% if card.image_position %} object-position:{{ card.image_position }};{% endif %} border-radius:4px; margin-bottom:20px;">
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.text }}</p>
         </div>
-        <div class="r-item">
-          <img src="images/avishai-giving-a-breema-bodywork-treatment.jpg" alt="Avishai giving a Breema bodywork treatment" style="width:100%; height:180px; object-fit:cover; object-position:top; border-radius:4px; margin-bottom:20px;">
-          <h3>Reconnect through the body</h3>
-          <p>Daily yoga, Kundalini, sound healing, and Breema Bodywork help you physically process your journey. This ensures your new insights take root deep in your muscle memory, and not just a memory.</p>
-        </div>
-        <div class="r-item">
-          <img src="images/guided-integration-and-healing-moment.jpg" alt="Guided integration and healing moment" style="width:100%; height:180px; object-fit:cover; border-radius:4px; margin-bottom:20px;">
-          <h3>Leave with tools, not just memories</h3>
-          <p>Guided integration sessions with Ricky, a certified Psychedelic Integration Practitioner, help translate what surfaces into something you can actually carry home and live from.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -323,98 +304,38 @@
   <section class="highlights">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">The ceremonies</span>
-        <h2>Ancient practice, held with care</h2>
+        <span class="eyebrow">{{ c.ceremonies.eyebrow }}</span>
+        <h2>{{ c.ceremonies.title }}</h2>
       </div>
       <div class="h-grid">
-        <div class="h-item"><span class="label">Mini Vision Quest</span></div>
-        <div class="h-item"><span class="label">Cacao &amp; Sound Healing</span></div>
-        <div class="h-item"><span class="label">Wachuma/San-Pedro and Kambo medicine (optional)</span></div>
-        <div class="h-item"><span class="label">Despacho/Gratitude ceremony</span></div>
-        <div class="h-item"><span class="label">Group Breema Bodywork, Kundalini and Yoga classes</span></div>
-        <div class="h-item"><span class="label">Sweat Lodge purification ceremony</span></div>
-        <div class="h-item"><span class="label">Private post retreat integration sessions (Ricky)</span></div>
-        <div class="h-item"><span class="label">Private therapeutic shamanic sessions (Viviana)</span></div>
-        <div class="h-item"><span class="label">Private Breema Bodywork sessions (Avishai)</span></div>
+        {% for item in c.ceremonies.items %}
+        <div class="h-item"><span class="label">{{ item }}</span></div>
+        {% endfor %}
       </div>
       <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px;">
-        <img src="images/sound-healing-instruments.jpg" alt="Sound healing instruments" style="width:100%; height:130px; object-fit:cover; border-radius:4px;">
-        <img src="images/urubamba-market.jpg" alt="Urubamba market" style="width:100%; height:130px; object-fit:cover; border-radius:4px;">
-        <img src="images/ceremony-blessing.jpg" alt="Ceremony blessing" style="width:100%; height:130px; object-fit:cover; border-radius:4px;">
-        <img src="images/q-ero-shamans.jpg" alt="Q'ero shamans" style="width:100%; height:130px; object-fit:cover; border-radius:4px;">
+        {% for photo in c.ceremonies.gallery %}
+        <img src="{{ photo.image }}" alt="{{ photo.alt }}" style="width:100%; height:130px; object-fit:cover; border-radius:4px;">
+        {% endfor %}
       </div>
-      <p style="text-align:center; font-size:11px; color:#8a6f57; margin-top:12px;">Real moments from past journeys</p>
+      <p style="text-align:center; font-size:11px; color:#8a6f57; margin-top:12px;">{{ c.ceremonies.gallery_caption }}</p>
     </div>
   </section>
 
   <section class="itinerary">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Day by day</span>
-        <h2>The retreat itinerary</h2>
+        <span class="eyebrow">{{ c.itinerary.eyebrow }}</span>
+        <h2>{{ c.itinerary.title }}</h2>
       </div>
-      <p class="lede">A full arc, from arrival to closing circle, each day builds on the one before.</p>
+      <p class="lede">{{ c.itinerary.lede }}</p>
       <div class="journal">
+        {% for day in c.itinerary.days %}
         <div class="entry">
-          <span class="day-tag">Day 1 &middot; Thu Dec 10 - Arrival</span>
-          <h3>Welcoming fire</h3>
-          <p>Afternoon pickup and arrival in Urubamba, a welcoming circle, a nurturing first dinner, and an evening fire ritual with Viviana and Ricky to set our collective intention.</p>
+          <span class="day-tag">{{ day.tag }}</span>
+          <h3>{{ day.title }}</h3>
+          <p>{{ day.text }}</p>
         </div>
-        <div class="entry">
-          <span class="day-tag">Day 2 &middot; Fri Dec 11</span>
-          <h3>Hummingbird Sanctuary &amp; mini vision quest</h3>
-          <p>Morning at Hummingbird Sanctuary, then a hike into the high Andes for a guided walking meditation, solitude, and communion with the mountain, followed by an integration meeting.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 3 &middot; Sat Dec 12</span>
-          <h3>Kambo &amp; cacao ceremony</h3>
-          <p>Breema Bodywork, Kambo ceremony, free time or a hike through the Yucay Inca terraces, cacao ceremony, and music around the fire.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 4 &middot; Sun Dec 13</span>
-          <h3>Kundalini yoga &amp; sweat lodge</h3>
-          <p>An opening talk and Kundalini Yoga with Viviana, followed by the building of the fire and a traditional sweat lodge (temazcal), cleansing body, mind, and spirit.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 5 &middot; Mon Dec 14</span>
-          <h3>Wachuma (San Pedro) medicine</h3>
-          <p>A gentle morning of yoga followed by Wachuma medicine ceremony, held with care through the afternoon and evening.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 6 &middot; Tue Dec 15</span>
-          <h3>Integration &amp; sound healing</h3>
-          <p>Breema Bodywork, meditation, relaxation and intuitive writing, Sound Healing journey.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 7 &middot; Wed Dec 16</span>
-          <h3>Urubamba Market, Moray/Salineras &amp; Despacho ceremony</h3>
-          <p>Morning yoga, exploring the Urubamba Weekly open market, visit the Moray Inca terraces, and Salineras salt pools, hike to the valley, then closing the day with a Despacho ceremony led by Q'ero shamans.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 8 &middot; Thu Dec 17</span>
-          <h3>Machu Picchu</h3>
-          <p>A scenic train ride to Aguas Calientes, a guided visit to Machu Picchu, time to explore Aguas Calientes and the Inca town market, then a train back to Urubamba.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 9 &middot; Fri Dec 18</span>
-          <h3>Lares Hot Springs</h3>
-          <p>Breathtaking ride to Lares Hot Springs and a hike to the magnificent waterfalls on the way. Optional free time in Pisac.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 10 &middot; Sat Dec 19</span>
-          <h3>Parque de las Papas</h3>
-          <p>A day with the local Andean villagers, exploring the fascinating Parque de las Papas, free time in Pisac, and traveling onward to Cusco (Hotel Amaru, San Blas), for the final two nights.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 11 &middot; Sun Dec 20</span>
-          <h3>Cusco &amp; closing celebration</h3>
-          <p>Visit the Sacsayhuam&aacute;n archeology site, a free afternoon or city tour/San Pedro market, and a closing dinner with a live show and dancing.</p>
-        </div>
-        <div class="entry">
-          <span class="day-tag">Day 12 &middot; Mon Dec 21 - Departure</span>
-          <h3>Closing circle &amp; goodbyes</h3>
-          <p>A final breakfast, closing circle, and farewell lunch together before we say our goodbyes, whether you're heading home or extending your stay in Peru.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -422,20 +343,17 @@
   <section class="hotels">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Where you'll stay</span>
-        <h2>Your home base in the Sacred Valley</h2>
+        <span class="eyebrow">{{ c.hotels.eyebrow }}</span>
+        <h2>{{ c.hotels.title }}</h2>
       </div>
       <div class="hotel-grid">
+        {% for hotel in c.hotels.items %}
         <div class="hotel-card">
-          <img src="images/amaru-valle-urubamba.jpg" alt="Amaru Valle, Urubamba" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin-bottom:18px;">
-          <h3>Amaru Valle - Urubamba</h3>
-          <p>Your base for most of the retreat, in the heart of the Sacred Valley, close to the ceremony grounds at Nahala and Urubamba's markets.</p>
+          <img src="{{ hotel.image }}" alt="{{ hotel.alt }}" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin-bottom:18px;">
+          <h3>{{ hotel.title }}</h3>
+          <p>{{ hotel.text }}</p>
         </div>
-        <div class="hotel-card">
-          <img src="images/hotel-amaru-san-blas-cusco.jpg" alt="Hotel Amaru, San Blas, Cusco" style="width:100%; height:220px; object-fit:cover; border-radius:4px; margin-bottom:18px;">
-          <h3>Hotel Amaru - San Blas, Cusco</h3>
-          <p>Your home for the final two nights, in the artistic San Blas neighborhood of Cusco, a walking distance from plaza de Armas and the downtown Cusco.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -443,33 +361,24 @@
   <section class="included">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">The details</span>
-        <h2>What's included</h2>
+        <span class="eyebrow">{{ c.included.eyebrow }}</span>
+        <h2>{{ c.included.title }}</h2>
       </div>
       <div class="inc-grid">
         <div class="inc-card yes">
-          <h3>Included</h3>
+          <h3>{{ c.included.included_title }}</h3>
           <ul>
-            <li>11 nights accommodation (Urubamba &amp; Cusco)</li>
-            <li>All ceremonies &amp; facilitators (Kambo, Cacao, Wachuma, Sweat Lodge, Despacho, Sound Healing)</li>
-            <li>Daily yoga, Breema Bodywork &amp; meditation sessions</li>
-            <li>All group transportation within the itinerary</li>
-            <li>Train to/from Aguas Calientes (Machu Picchu)</li>
-            <li>Entrance to Machu Picchu with shuttle service</li>
-            <li>Entrance fees to archaeological sites and temples</li>
-            <li>Great English-speaking guides</li>
-            <li>Ceremonies preparation and integration</li>
-            <li>Fresh and organic meals cooked by a private chef</li>
-            <li>Guidance and private sessions with Viviana Dumas, Avishai Pearlson &amp; Ricky Trigalo throughout</li>
+            {% for item in c.included.included_items %}
+            <li>{{ item }}</li>
+            {% endfor %}
           </ul>
         </div>
         <div class="inc-card no">
-          <h3>Not included</h3>
+          <h3>{{ c.included.not_included_title }}</h3>
           <ul>
-            <li>International flights to/from Peru</li>
-            <li>Travel insurance</li>
-            <li>Personal expenses &amp; optional shopping</li>
-            <li>[Any meals not listed / alcohol / tips - confirm]</li>
+            {% for item in c.included.not_included_items %}
+            <li>{{ item }}</li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -479,28 +388,18 @@
   <section class="hosts">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Your guides</span>
-        <h2>Meet the circle holding this journey</h2>
+        <span class="eyebrow">{{ c.hosts.eyebrow }}</span>
+        <h2>{{ c.hosts.title }}</h2>
       </div>
       <div class="host-grid">
+        {% for person in c.hosts.people %}
         <div class="host">
-          <img src="images/viviana-dumas.jpg" alt="Viviana Dumas" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 18px; display:block;">
-          <h3>Viviana Dumas</h3>
-          <span class="role">Ceremony &amp; ancestral healing</span>
-          <p>Born and raised in Cusco, Viviana is a rare bridge between the indigenous world and Western clinical psychology. Trained directly under local Curanderas in traditional Andean healing, she pairs that lineage with degrees in Anthropology (UC Berkeley) and Transpersonal Psychology, and over 25 years guiding people through trauma and transformation. She also serves as Executive Director of Ni&ntilde;os del Sol, supporting vulnerable children in the Sacred Valley.</p>
+          <img src="{{ person.image }}" alt="{{ person.alt }}" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 18px; display:block;">
+          <h3>{{ person.name }}</h3>
+          <span class="role">{{ person.role }}</span>
+          <p>{{ person.bio }}</p>
         </div>
-        <div class="host">
-          <img src="images/avishai-pearlson.jpg" alt="Avishai Pearlson" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 18px; display:block;">
-          <h3>Avishai Pearlson</h3>
-          <span class="role">Bodywork &amp; nourishment</span>
-          <p>Raised on an Israeli kibbutz and having taught across four continents, Avishai is a certified Breema Bodywork practitioner and instructor, including years teaching at the University of Oregon, devoted to the art of being present. A longtime student of meditation, permaculture, and holistic living, he also brings his skills as a conscious, health-focused chef, making sure the group is nourished in body and soul with organic, locally sourced food throughout the journey.</p>
-        </div>
-        <div class="host">
-          <img src="images/ricky-trigalo.jpg" alt="Ricky Trigalo" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 18px; display:block;">
-          <h3>Ricky Trigalo</h3>
-          <span class="role">Integration &amp; functional wellness</span>
-          <p>Founder of Life Changing Wellness and a certified Psychedelic Integration Practitioner (ICEERS Academy), Ricky has spent over a decade working alongside Peruvian shamans and immersed in indigenous healing traditions. She holds the integration threads of this journey - meditation, intuitive writing, and the work of turning ceremony into lasting change.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -508,69 +407,51 @@
   <section class="faq">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Good to know</span>
-        <h2>Frequently asked questions</h2>
+        <span class="eyebrow">{{ c.faq.eyebrow }}</span>
+        <h2>{{ c.faq.title }}</h2>
       </div>
       <div class="faq-list">
-        <details open>
-          <summary>Do I need prior ceremony experience?</summary>
-          <p>No prior experience is required. What matters more is an open heart and a willingness to prepare. We'll send pre-trip guidance in the weeks before departure so you arrive ready in body and mind.</p>
+        {% for item in c.faq.items %}
+        <details{% if item.open %} open{% endif %}>
+          <summary>{{ item.question }}</summary>
+          <p>{{ item.answer }}</p>
         </details>
-        <details>
-          <summary>What are Kambo and Wachuma, and are they safe for me?</summary>
-          <p>Kambo is a traditional Amazonian cleansing practice, and Wachuma (San Pedro) is an Andean plant medicine used in ceremony for reflection and insight. Both are held by experienced local facilitators, but they are not right for everyone - certain heart conditions, pregnancy, and some medications require caution. After you reserve your spot, we'll send a health intake form and ask you to disclose your full medical history and any medications so our facilitators can advise you individually; if in doubt, please also check with your own doctor before traveling.</p>
-        </details>
-        <details>
-          <summary>How is integration supported after ceremony?</summary>
-          <p>Ricky, a certified Psychedelic Integration Practitioner, leads dedicated integration sessions throughout the journey - meditation, intuitive writing, and group processing - so what surfaces in ceremony has somewhere to go, both during the trip and after you return home.</p>
-        </details>
-        <details>
-          <summary>What's the altitude like - will I be okay?</summary>
-          <p>Urubamba sits at about 2,870m (9,400ft) and Cusco at about 3,400m (11,150ft). We build the first days around gentle pacing, rest, and hydration to help you adjust. Most people acclimatize well, but if you have a heart or respiratory condition, please check with your doctor before booking.</p>
-        </details>
-        <details>
-          <summary>Can I arrive early or stay longer?</summary>
-          <p>Yes, many guests choose to extend their stay before or after the journey. Let us know when you reserve your spot and we can help you arrange extra nights and airport transfers.</p>
-        </details>
-        <details>
-          <summary>What should I pack?</summary>
-          <p>Think layers, warm evenings and sunny days, comfortable hiking shoes, a reusable water bottle, a journal, sun protection, and any personal medications. We'll send a full packing list once you've reserved your spot.</p>
-        </details>
+        {% endfor %}
       </div>
     </div>
   </section>
 
   <section class="pricing">
     <div class="wrap">
-      <span class="eyebrow">Reserve your place</span>
-      <h2>The investment</h2>
-      <p class="lede">Space is held to a small circle, [X] spots total.</p>
+      <span class="eyebrow">{{ c.pricing.eyebrow }}</span>
+      <h2>{{ c.pricing.title }}</h2>
+      <p class="lede">{{ c.pricing.lede }}</p>
       <div class="price-cards">
         <div class="price-card">
           <div class="label">Shared room</div>
-          <div class="amount">[$PRICE]</div>
+          <div class="amount">{{ c.pricing.shared_room_price }}</div>
           <div class="label" style="color:rgba(255,255,255,0.5)">per person</div>
         </div>
         <div class="price-card">
           <div class="label">Private room</div>
-          <div class="amount">[$PRICE]</div>
+          <div class="amount">{{ c.pricing.private_room_price }}</div>
           <div class="label" style="color:rgba(255,255,255,0.5)">per person</div>
         </div>
       </div>
-      <a class="btn btn-primary" href="#" style="background:var(--gold);">Reserve my spot - pay deposit</a>
-      <p style="margin-top:26px; font-size:13.5px; color:rgba(255,255,255,0.7); max-width:52ch; margin-left:auto; margin-right:auto;">To sign up and secure your place, we ask for a deposit of $500*. <br>*Nonrefundable, unless the journey is canceled by the organizers.</p>
+      <a class="btn btn-primary" href="{{ c.pricing.button_url }}" style="background:var(--gold);">{{ c.pricing.button_text }}</a>
+      <p style="margin-top:26px; font-size:13.5px; color:rgba(255,255,255,0.7); max-width:52ch; margin-left:auto; margin-right:auto;">{{ c.pricing.deposit_note }} <br>{{ c.pricing.deposit_note_2 }}</p>
     </div>
   </section>
 
   <section class="final">
     <div class="wrap">
-      <div class="eyebrow" style="color:var(--sage-dark)">The circle is forming</div>
-      <h2>The mountains are calling.</h2>
-      <p>Twelve days. A handful of souls. Ceremonies held in these valleys for generations, and a team who will help you carry it home.</p>
+      <div class="eyebrow" style="color:var(--sage-dark)">{{ c.final.eyebrow }}</div>
+      <h2>{{ c.final.title }}</h2>
+      <p>{{ c.final.text }}</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="https://www.paypal.com/pool/9qJJpGJglF?sr=wccr">Reserve your spot</a>
+        <a class="btn btn-primary" href="{{ c.final.button_url }}">{{ c.final.button_text }}</a>
       </div>
-      <div class="contact-line">WhatsApp [phone number] &middot; Email [address] &middot; lifechangingwellness.net</div>
+      <div class="contact-line">{{ c.final.contact_line }}</div>
     </div>
   </section>
 
