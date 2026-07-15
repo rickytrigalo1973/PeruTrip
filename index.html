@@ -394,7 +394,7 @@
       <div class="host-grid">
         {% for person in c.hosts.people %}
         <div class="host">
-          <img src="{{ person.image }}" alt="{{ person.alt }}" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin:0 auto 18px; display:block;">
+          <img src="{{ person.image }}" alt="{{ person.alt }}" style="width:140px; height:140px; object-fit:cover;{% if person.image_position %} object-position:{{ person.image_position }};{% endif %} border-radius:50%; margin:0 auto 18px; display:block;">
           <h3>{{ person.name }}</h3>
           <span class="role">{{ person.role }}</span>
           <p>{{ person.bio }}</p>

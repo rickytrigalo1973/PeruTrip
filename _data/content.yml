@@ -164,6 +164,7 @@ hosts:
       bio: "Born and raised in Cusco, Viviana is a rare bridge between the indigenous world and Western clinical psychology. Trained directly under local Curanderas in traditional Andean healing, she pairs that lineage with degrees in Anthropology (UC Berkeley) and Transpersonal Psychology, and over 25 years guiding people through trauma and transformation. She also serves as Executive Director of Niños del Sol, supporting vulnerable children in the Sacred Valley."
     - image: "images/avishai-pearlson-2.jpg"
       alt: "Avishai Pearlson"
+      image_position: "50% 20%"
       name: "Avishai Pearlson"
       role: "Bodywork & nourishment"
       bio: "Raised on an Israeli kibbutz and having taught across four continents, Avishai is a certified Breema Bodywork practitioner and instructor, including years teaching at the University of Oregon, devoted to the art of being present. A longtime student of meditation, permaculture, and holistic living, he also brings his skills as a conscious, health-focused chef, making sure the group is nourished in body and soul with organic, locally sourced food throughout the journey."
