@@ -4,7 +4,7 @@ hero:
   subtitle: "A twelve-day journey of a deeper connection to self and nature, Inca tradition and life transformation."
   hosts_line: "With Viviana Dumas, Avishai Pearlson & Ricky Trigalo"
   primary_button_text: "Reserve your spot"
-  primary_button_url: "https://www.paypal.com/pool/9qJJpGJglF?sr=wccr"
+  primary_button_url: "https://www.paypal.com/paypalme/rickytrigalo73/500"
   secondary_button_text: "Ask us a question"
   secondary_button_url: "mailto:ricky@rickytrigalonutrition.com"
 
@@ -199,7 +199,7 @@ pricing:
   shared_room_price: "$3500"
   private_room_price: "$4200"
   button_text: "Reserve my spot - pay deposit"
-  button_url: "#"
+  button_url: "https://www.paypal.com/paypalme/rickytrigalo73/500"
   deposit_note: "To sign up and secure your place, we ask for a deposit of $500*."
   deposit_note_2: "*Nonrefundable, unless the journey is canceled by the organizers."
 
@@ -208,5 +208,5 @@ final:
   title: "The mountains are calling."
   text: "Twelve days. A handful of souls. Ceremonies held in these valleys for generations, and a team who will help you carry it home."
   button_text: "Reserve your spot"
-  button_url: "https://www.paypal.com/pool/9qJJpGJglF?sr=wccr"
+  button_url: "https://www.paypal.com/paypalme/rickytrigalo73/500"
   contact_line: "WhatsApp +1(408)431-0414 · Email ricky@rickytrigalonutrition.com · lifechangingwellness.net"
