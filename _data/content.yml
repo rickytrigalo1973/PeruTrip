@@ -6,7 +6,7 @@ hero:
   primary_button_text: "Reserve your spot"
   primary_button_url: "https://www.paypal.com/paypalme/rickytrigalo73/500"
   secondary_button_text: "Ask us a question"
-  secondary_button_url: "mailto:ricky@rickytrigalonutrition.com"
+  secondary_button_url: "mailto:ricky@rickytrigalonutrition.com?subject=The%20Sacred%20Inca%20Path%20-%20I%20have%20a%20question"
 
 invitation:
   eyebrow: "Small Intimate Circle"
@@ -151,7 +151,7 @@ included:
     - "International flights to/from Peru"
     - "Travel insurance"
     - "Personal expenses & optional shopping"
-    - "[Any meals not listed / alcohol / tips - confirm]"
+    - "[Any meals not listed / alcohol / tips]"
 
 hosts:
   eyebrow: "Your guides"

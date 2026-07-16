@@ -178,8 +178,13 @@
   .included h2{ font-size:34px; }
   .inc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:34px; }
   .inc-card{ border:1px solid var(--cream-dark); border-radius:4px; padding:28px 30px; }
-  .inc-card h3{ font-size:18px; margin-bottom:16px; font-family:'Jost', sans-serif; font-weight:500; letter-spacing:0.02em; }
-  .inc-card ul{ list-style:none; padding:0; margin:0; }
+  .inc-card summary{ cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  .inc-card summary::-webkit-details-marker{ display:none; }
+  .inc-card summary:after{ content:'+'; font-size:20px; color:var(--gold); margin-left:16px; flex-shrink:0; }
+  .inc-card[open] summary:after{ content:'\2212'; }
+  .inc-card:not([open]) ul{ display:none; }
+  .inc-card h3{ font-size:18px; font-family:'Jost', sans-serif; font-weight:500; letter-spacing:0.02em; }
+  .inc-card ul{ list-style:none; padding:0; margin:16px 0 0; }
   .inc-card li{ font-size:17px; line-height:1.6; color:#5B564C; padding:10px 0; border-bottom:1px solid var(--cream-dark); }
   .inc-card li:last-child{ border-bottom:none; }
   .inc-card.yes h3{ color:var(--sage-dark); }
@@ -199,9 +204,18 @@
 
   /* FAQ */
   .faq{ background:var(--paper); }
-  .faq .head{ text-align:center; margin-bottom:44px; }
   .faq h2{ font-size:34px; }
-  .faq-list{ max-width:720px; margin:0 auto; }
+  .faq-list{ max-width:720px; margin:30px auto 0; }
+
+  /* Whole-section collapse (FAQ) */
+  .section-toggle{ text-align:center; }
+  .section-toggle > summary{ cursor:pointer; list-style:none; }
+  .section-toggle > summary::-webkit-details-marker{ display:none; }
+  .section-toggle .toggle-indicator{ display:inline-block; margin-left:10px; font-size:26px; line-height:1; color:var(--gold); vertical-align:middle; }
+  .section-toggle .toggle-indicator:after{ content:'+'; }
+  .section-toggle[open] .toggle-indicator:after{ content:'\2212'; }
+  /* Nested <details> inside a collapsed parent aren't reliably hidden by the browser natively, so force it explicitly */
+  .section-toggle:not([open]) .faq-list{ display:none; }
   .faq-list details{
     border-bottom:1px solid var(--cream-dark); padding:20px 0;
   }
@@ -213,6 +227,7 @@
   .faq-list summary:after{ content:'+'; font-size:20px; color:var(--gold); margin-left:16px; flex-shrink:0; }
   .faq-list details[open] summary:after{ content:'\2212'; }
   .faq-list details p{ font-size:17px; line-height:1.7; color:#5B564C; margin-top:12px; max-width:64ch; }
+  .faq-list details:not([open]) p{ display:none; }
 
   /* PRICING */
   .pricing{ background:var(--sage-dark); color:#fff; text-align:center; }
@@ -244,6 +259,7 @@
     .entry summary{ cursor:pointer; position:relative; padding-right:26px; }
     .entry summary:after{ content:'+'; position:absolute; right:0; top:0; font-size:19px; color:var(--gold); }
     .entry[open] summary:after{ content:'\2212'; }
+    .entry:not([open]) p{ display:none; }
   }
 </style>
 </head>
@@ -376,22 +392,22 @@
         <h2>{{ c.included.title }}</h2>
       </div>
       <div class="inc-grid">
-        <div class="inc-card yes">
-          <h3>{{ c.included.included_title }}</h3>
+        <details class="inc-card yes">
+          <summary><h3>{{ c.included.included_title }}</h3></summary>
           <ul>
             {% for item in c.included.included_items %}
             <li>{{ item }}</li>
             {% endfor %}
           </ul>
-        </div>
-        <div class="inc-card no">
-          <h3>{{ c.included.not_included_title }}</h3>
+        </details>
+        <details class="inc-card no">
+          <summary><h3>{{ c.included.not_included_title }}</h3></summary>
           <ul>
             {% for item in c.included.not_included_items %}
             <li>{{ item }}</li>
             {% endfor %}
           </ul>
-        </div>
+        </details>
       </div>
     </div>
   </section>
@@ -417,18 +433,20 @@
 
   <section class="faq">
     <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">{{ c.faq.eyebrow }}</span>
-        <h2>{{ c.faq.title }}</h2>
-      </div>
-      <div class="faq-list">
-        {% for item in c.faq.items %}
-        <details{% if item.open %} open{% endif %}>
-          <summary>{{ item.question }}</summary>
-          <p>{{ item.answer }}</p>
-        </details>
-        {% endfor %}
-      </div>
+      <details class="section-toggle">
+        <summary>
+          <span class="eyebrow">{{ c.faq.eyebrow }}</span>
+          <h2>{{ c.faq.title }}<span class="toggle-indicator"></span></h2>
+        </summary>
+        <div class="faq-list">
+          {% for item in c.faq.items %}
+          <details{% if item.open %} open{% endif %}>
+            <summary>{{ item.question }}</summary>
+            <p>{{ item.answer }}</p>
+          </details>
+          {% endfor %}
+        </div>
+      </details>
     </div>
   </section>
 
