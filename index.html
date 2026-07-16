@@ -154,6 +154,12 @@
   .entry .day-tag{ font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px; }
   .entry h3{ font-size:19px; margin-bottom:6px; }
   .entry p{ font-size:17px; line-height:1.7; color:#5B564C; max-width:64ch; }
+  .entry summary{ list-style:none; cursor:default; }
+  .entry summary::-webkit-details-marker{ display:none; }
+  /* On mobile the itinerary becomes a tap-to-expand accordion to keep the page shorter */
+  @media(min-width:761px){
+    .entry p{ display:block !important; }
+  }
 
   /* HOTELS */
   .hotels{ background:var(--cream); }
@@ -231,10 +237,13 @@
     .invitation-grid, .fw-grid, .r-grid, .h-grid, .host-grid, .price-cards, .hotel-grid, .inc-grid{ grid-template-columns:1fr; }
     .hero h1{ font-size:38px; }
     .hero{ min-height:480px; }
-    section{ padding:56px 0; }
+    section{ padding:40px 0; }
     .wrap{ padding:0 20px; }
     .journal{ padding-left:0; }
     .entry{ padding-left:26px; }
+    .entry summary{ cursor:pointer; position:relative; padding-right:26px; }
+    .entry summary:after{ content:'+'; position:absolute; right:0; top:0; font-size:19px; color:var(--gold); }
+    .entry[open] summary:after{ content:'\2212'; }
   }
 </style>
 </head>
@@ -330,11 +339,13 @@
       <p class="lede">{{ c.itinerary.lede }}</p>
       <div class="journal">
         {% for day in c.itinerary.days %}
-        <div class="entry">
-          <span class="day-tag">{{ day.tag }}</span>
-          <h3>{{ day.title }}</h3>
+        <details class="entry">
+          <summary>
+            <span class="day-tag">{{ day.tag }}</span>
+            <h3>{{ day.title }}</h3>
+          </summary>
           <p>{{ day.text }}</p>
-        </div>
+        </details>
         {% endfor %}
       </div>
     </div>
