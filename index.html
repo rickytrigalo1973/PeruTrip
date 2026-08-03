@@ -44,6 +44,18 @@
   .ornament span{ height:1px; width:46px; background:var(--gold); opacity:0.55; }
   .ornament i{ width:6px; height:6px; border-radius:50%; background:var(--gold); display:inline-block; }
 
+  /* TOP NAV */
+  .topnav{ position:sticky; top:0; z-index:100; background:var(--ink); border-bottom:1px solid rgba(255,255,255,0.08); }
+  .topnav-inner{ display:flex; align-items:center; gap:24px; padding:16px 32px; }
+  .topnav-logo{ font-family:'Cormorant Garamond', serif; font-size:19px; font-weight:500; color:var(--cream); text-decoration:none; margin-right:auto; }
+  .topnav-links{ display:flex; align-items:center; gap:28px; list-style:none; }
+  .topnav-links a{ font-family:'Jost', sans-serif; font-size:12px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--cream-dark); text-decoration:none; }
+  .topnav-links a:hover{ color:var(--gold); }
+  .topnav-cta{ border:1px solid var(--gold); padding:8px 18px; border-radius:2px; color:var(--gold) !important; }
+  .topnav-toggle-input{ display:none; }
+  .topnav-toggle{ display:none; font-size:22px; line-height:1; color:var(--cream); cursor:pointer; margin-left:auto; user-select:none; }
+  #forwho, #itinerary, #hotels, #hosts, #faq{ scroll-margin-top:70px; }
+
   /* HERO */
   .hero{
     position:relative;
@@ -249,6 +261,10 @@
   .contact-line{ margin-top:28px; font-size:13px; color:rgba(255,255,255,0.85); letter-spacing:0.02em; }
 
   @media(max-width:760px){
+    .topnav-inner{ padding:14px 20px; flex-wrap:wrap; }
+    .topnav-toggle{ display:block; }
+    .topnav-links{ flex-basis:100%; flex-direction:column; align-items:flex-start; gap:16px; max-height:0; overflow:hidden; width:100%; transition:max-height 0.25s ease; }
+    .topnav-toggle-input:checked ~ .topnav-links{ max-height:400px; margin-top:18px; }
     .invitation-grid, .fw-grid, .r-grid, .h-grid, .host-grid, .price-cards, .hotel-grid, .inc-grid{ grid-template-columns:1fr; }
     .hero h1{ font-size:38px; }
     .hero{ min-height:480px; }
@@ -265,6 +281,22 @@
 </head>
 <body>
 {% assign c = site.data.content %}
+
+  <nav class="topnav">
+    <div class="topnav-inner wrap">
+      <a href="#" class="topnav-logo">{{ c.hero.title }}</a>
+      <input type="checkbox" id="nav-toggle" class="topnav-toggle-input">
+      <label for="nav-toggle" class="topnav-toggle">&#9776;</label>
+      <ul class="topnav-links">
+        <li><a href="#forwho">Who It's For</a></li>
+        <li><a href="#itinerary">Itinerary</a></li>
+        <li><a href="#hotels">Hotels</a></li>
+        <li><a href="#hosts">Guides</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="{{ c.pricing.button_url }}" class="topnav-cta" target="_blank" rel="noopener noreferrer">Reserve</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <section class="hero">
     <div class="photo-ph"></div>
@@ -292,7 +324,7 @@
     </div>
   </section>
 
-  <section class="forwho">
+  <section class="forwho" id="forwho">
     <div class="wrap">
       <div class="ornament"><span></span><i></i><span></span></div>
       <span class="eyebrow">{{ c.forwho.eyebrow }}</span>
@@ -346,7 +378,7 @@
     </div>
   </section>
 
-  <section class="itinerary">
+  <section class="itinerary" id="itinerary">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">{{ c.itinerary.eyebrow }}</span>
@@ -367,7 +399,7 @@
     </div>
   </section>
 
-  <section class="hotels">
+  <section class="hotels" id="hotels">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">{{ c.hotels.eyebrow }}</span>
@@ -412,7 +444,7 @@
     </div>
   </section>
 
-  <section class="hosts">
+  <section class="hosts" id="hosts">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">{{ c.hosts.eyebrow }}</span>
@@ -431,7 +463,7 @@
     </div>
   </section>
 
-  <section class="faq">
+  <section class="faq" id="faq">
     <div class="wrap">
       <details class="section-toggle">
         <summary>
