@@ -194,7 +194,7 @@ faq:
 pricing:
   eyebrow: "Reserve your place"
   title: "The investment"
-  lede: "Space is held to a small circle, [X] spots total."
+  lede: "Space is held to a small circle, 12 spots total."
   shared_room_price: "$3500"
   private_room_price: "$4200"
   button_text: "Reserve my spot - pay deposit"
